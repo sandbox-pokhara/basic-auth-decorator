@@ -3,7 +3,7 @@ requires = ["setuptools>=70.0.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "django-basic-auth"
+name = "django-basic-auth-decorator"
 requires-python = ">=3"
 authors = [{ name = "basic_auth", email = "pradish@sandbox.com.np" }]
 description = "Basic auth decorator for Django Ninja."
@@ -15,17 +15,17 @@ dynamic = ["version", "dependencies"]
 
 
 [project.urls]
-Homepage = "https://github.com/sandbox-pokhara/django-basic-auth"
-Issues = "https://github.com/sandbox-pokhara/django-basic-auth/issues"
+Homepage = "https://github.com/sandbox-pokhara/django-basic-auth-decorator"
+Issues = "https://github.com/sandbox-pokhara/django-basic-auth-decorator/issues"
 
 [tool.setuptools]
 include-package-data = true
 
 [tool.setuptools.package-dir]
-"django_basic_auth" = "django_basic_auth"
+"django_basic_auth_decorator" = "django_basic_auth_decorator"
 
 [tool.setuptools.dynamic]
-version = { attr = "django_basic_auth.__version__" }
+version = { attr = "django_basic_auth_decorator.__version__" }
 dependencies = { file = "requirements.txt" }
 
 [tool.isort]
@@ -41,5 +41,5 @@ enable-unstable-feature = ["string_processing"]
 [tool.pyright]
 venvPath = "."
 venv = "venv"
-include = ["django_basic_auth", "test.py"]
+include = ["django_basic_auth_decorator", "test.py"]
 typeCheckingMode = "strict"

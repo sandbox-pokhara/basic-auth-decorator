@@ -1,4 +1,4 @@
-# django-basic-auth
+# django-basic-auth-decorator
 
 Basic auth decorator for Django.
 
@@ -7,13 +7,13 @@ Basic auth decorator for Django.
 You can install the package via pip:
 
 ```
-pip install django-basic-auth
+pip install django-basic-auth-decorator
 ```
 
 ## Usage
 
 ```python
-from django_basic_auth.decorators import basic_auth
+from django_basic_auth_decorator.decorators import basic_auth
 
 # Define your allowed credentials
 CREDENTIALS = [
