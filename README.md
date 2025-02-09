@@ -13,7 +13,7 @@ pip install django-basic-auth
 ## Usage
 
 ```python
-from django_basic_auth import basic_auth
+from django_basic_auth.decorators import basic_auth
 
 # Define your allowed credentials
 CREDENTIALS = [
