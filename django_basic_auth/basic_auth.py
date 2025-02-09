@@ -1,21 +1,20 @@
 import base64
 from functools import wraps
-from typing import Any
 from typing import Callable
+from typing import ParamSpec
 from typing import TypeVar
 
 from django.http import HttpRequest
 from django.http import HttpResponse
 
-F = TypeVar("F", bound=Callable[..., Any])
+P = ParamSpec("P")
+R = TypeVar("R", covariant=True)
 
 
-def basic_auth_decorator(credentials: list[tuple[str, str]]):
-    def BasicAuth(view_func: F) -> F:
+def basic_auth(credentials: list[tuple[str, str]]):
+    def decorator(view_func: Callable[[HttpRequest], R]):
         @wraps(view_func)
-        def _wrapped_view(
-            request: HttpRequest, *args: Any, **kwargs: Any
-        ) -> HttpResponse:
+        def wrapper(request: HttpRequest) -> R | HttpResponse:
             if "HTTP_AUTHORIZATION" in request.META:
                 auth = request.META["HTTP_AUTHORIZATION"].split()
                 if len(auth) == 2 and auth[0].lower() == "basic":
@@ -26,7 +25,7 @@ def basic_auth_decorator(credentials: list[tuple[str, str]]):
                             .split(":", 1)
                         )
                         if (username, password) in credentials:
-                            return view_func(request, *args, **kwargs)
+                            return view_func(request)
                     except (ValueError, UnicodeDecodeError):
                         pass
 
@@ -34,6 +33,6 @@ def basic_auth_decorator(credentials: list[tuple[str, str]]):
             response["WWW-Authenticate"] = 'Basic realm="API Docs"'
             return response
 
-        return _wrapped_view  # type: ignore
+        return wrapper
 
-    return BasicAuth
+    return decorator

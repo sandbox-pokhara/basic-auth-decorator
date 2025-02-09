@@ -1,20 +1,19 @@
-# basic-auth-decorator
+# django-basic-auth
 
-Basic auth decorator for Django Ninja.
+Basic auth decorator for Django.
 
 ## Installation
 
 You can install the package via pip:
 
 ```
-pip install basic-auth-decorator
+pip install django-basic-auth
 ```
 
 ## Usage
 
 ```python
-from basic_auth_decorator import basic_auth_decorator
-api = NinjaAPI()
+from django_basic_auth import basic_auth
 
 # Define your allowed credentials
 CREDENTIALS = [
@@ -23,10 +22,9 @@ CREDENTIALS = [
 ]
 
 # Apply the decorator on a view function
-@api.get("/protected")
-@basic_auth_decorator(CREDENTIALS)
-def protected_endpoint(request):
-    return JsonResponse({"message": "You have access!"})
+@basic_auth(CREDENTIALS)
+def my_view(request):
+    ...
 
 ```
 

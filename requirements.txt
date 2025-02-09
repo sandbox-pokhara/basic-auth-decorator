@@ -1,4 +1,1 @@
-django-stubs
-django-stubs-ext
-django-types
 Django>=3.2
